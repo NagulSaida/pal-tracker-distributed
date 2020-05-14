@@ -43,9 +43,7 @@ jobs:
           path: applications/timesheets-server/build/libs/timesheets-server.jar
 
   deploy-allocations:
-    needs:
-      - build-and-publish
-      - deploy-backlog
+    needs: build-and-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -73,9 +71,7 @@ jobs:
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
 
   deploy-backlog:
-    needs:
-      - build-and-publish
-      - deploy-registration
+    needs: build-and-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -131,9 +127,7 @@ jobs:
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
 
   deploy-timesheets:
-    needs:
-      - build-and-publish
-      - deploy-allocations
+    needs: build-and-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
