@@ -16,11 +16,13 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 public class UserDataGateway {
 
     private final JdbcTemplate jdbcTemplate;
+    private RowMapper<UserRecord> rowMapper =
+            (rs, num) -> new UserRecord(rs.getLong("id"), rs.getString("name"));
+
 
     public UserDataGateway(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
 
     public UserRecord create(String name) {
         KeyHolder keyholder = new GeneratedKeyHolder();
@@ -43,8 +45,4 @@ public class UserDataGateway {
 
         return list.get(0);
     }
-
-
-    private RowMapper<UserRecord> rowMapper =
-        (rs, num) -> new UserRecord(rs.getLong("id"), rs.getString("name"));
 }

@@ -20,31 +20,6 @@ public class ProjectForm {
         return new Builder();
     }
 
-    public static class Builder {
-        private long accountId;
-        private String name;
-        private boolean active;
-
-        public ProjectForm build() {
-            return new ProjectForm(this);
-        }
-
-        public Builder accountId(long accountId) {
-            this.accountId = accountId;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder active(boolean active) {
-            this.active = active;
-            return this;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,9 +43,34 @@ public class ProjectForm {
     @Override
     public String toString() {
         return "ProjectForm{" +
-            "accountId=" + accountId +
-            ", name='" + name + '\'' +
-            ", active=" + active +
-            '}';
+                "accountId=" + accountId +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                '}';
+    }
+
+    public static class Builder {
+        private long accountId;
+        private String name;
+        private boolean active;
+
+        public ProjectForm build() {
+            return new ProjectForm(this);
+        }
+
+        public Builder accountId(long accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder active(boolean active) {
+            this.active = active;
+            return this;
+        }
     }
 }

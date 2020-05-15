@@ -17,18 +17,25 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 public class ProjectDataGateway {
 
     private final JdbcTemplate jdbcTemplate;
+    private RowMapper<ProjectRecord> rowMapper =
+            (rs, num) -> projectRecordBuilder()
+                    .id(rs.getLong("id"))
+                    .accountId(rs.getLong("account_id"))
+                    .name(rs.getString("name"))
+                    .active(rs.getBoolean("active"))
+                    .build();
+
 
     public ProjectDataGateway(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
 
     public ProjectRecord create(ProjectFields fields) {
         KeyHolder keyholder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
-                "insert into projects (account_id, name, active) values (?, ?, ?)", RETURN_GENERATED_KEYS);
+                    "insert into projects (account_id, name, active) values (?, ?, ?)", RETURN_GENERATED_KEYS);
             ps.setLong(1, fields.accountId);
             ps.setString(2, fields.name);
             ps.setBoolean(3, true);
@@ -40,15 +47,15 @@ public class ProjectDataGateway {
 
     public List<ProjectRecord> findAllByAccountId(Long accountId) {
         return jdbcTemplate.query(
-            "select id, account_id, name, active from projects where account_id = ? order by name asc",
-            rowMapper, accountId
+                "select id, account_id, name, active from projects where account_id = ? order by name asc",
+                rowMapper, accountId
         );
     }
 
     public ProjectRecord find(long id) {
         List<ProjectRecord> list = jdbcTemplate.query(
-            "select id, account_id, name, active from projects where id = ? order by name asc",
-            rowMapper, id
+                "select id, account_id, name, active from projects where id = ? order by name asc",
+                rowMapper, id
         );
 
         if (list.isEmpty()) {
@@ -57,13 +64,4 @@ public class ProjectDataGateway {
 
         return list.get(0);
     }
-
-
-    private RowMapper<ProjectRecord> rowMapper =
-        (rs, num) -> projectRecordBuilder()
-            .id(rs.getLong("id"))
-            .accountId(rs.getLong("account_id"))
-            .name(rs.getString("name"))
-            .active(rs.getBoolean("active"))
-            .build();
 }

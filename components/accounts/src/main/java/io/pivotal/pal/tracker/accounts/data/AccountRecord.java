@@ -16,31 +16,6 @@ public class AccountRecord {
         return new Builder();
     }
 
-    public static class Builder {
-        private long id;
-        private long ownerId;
-        private String name;
-
-        public AccountRecord build() {
-            return new AccountRecord(this);
-        }
-
-        public Builder id(long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder ownerId(long ownerId) {
-            this.ownerId = ownerId;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,9 +39,34 @@ public class AccountRecord {
     @Override
     public String toString() {
         return "AccountRecord{" +
-            "id=" + id +
-            ", ownerId=" + ownerId +
-            ", name='" + name + '\'' +
-            '}';
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private long id;
+        private long ownerId;
+        private String name;
+
+        public AccountRecord build() {
+            return new AccountRecord(this);
+        }
+
+        public Builder id(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder ownerId(long ownerId) {
+            this.ownerId = ownerId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
     }
 }

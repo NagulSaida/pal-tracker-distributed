@@ -18,26 +18,6 @@ public class StoryForm {
         return new Builder();
     }
 
-
-    public static class Builder {
-        private long projectId;
-        private String name;
-
-        public StoryForm build() {
-            return new StoryForm(this);
-        }
-
-        public Builder projectId(long projectId) {
-            this.projectId = projectId;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,8 +39,27 @@ public class StoryForm {
     @Override
     public String toString() {
         return "StoryForm{" +
-            "projectId=" + projectId +
-            ", name='" + name + '\'' +
-            '}';
+                "projectId=" + projectId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private long projectId;
+        private String name;
+
+        public StoryForm build() {
+            return new StoryForm(this);
+        }
+
+        public Builder projectId(long projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
     }
 }

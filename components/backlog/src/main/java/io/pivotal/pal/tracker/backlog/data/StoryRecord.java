@@ -16,31 +16,6 @@ public class StoryRecord {
         return new Builder();
     }
 
-    public static class Builder {
-        private long id;
-        private long projectId;
-        private String name;
-
-        public StoryRecord build() {
-            return new StoryRecord(this);
-        }
-
-        public Builder id(long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder projectId(long projectId) {
-            this.projectId = projectId;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,9 +39,34 @@ public class StoryRecord {
     @Override
     public String toString() {
         return "StoryRecord{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", name='" + name + '\'' +
-            '}';
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private long id;
+        private long projectId;
+        private String name;
+
+        public StoryRecord build() {
+            return new StoryRecord(this);
+        }
+
+        public Builder id(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder projectId(long projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
     }
 }

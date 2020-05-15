@@ -25,6 +25,45 @@ public class TimeEntryInfo {
         return new Builder();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TimeEntryInfo that = (TimeEntryInfo) o;
+
+        if (id != that.id) return false;
+        if (projectId != that.projectId) return false;
+        if (userId != that.userId) return false;
+        if (hours != that.hours) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null)
+            return false;
+        return info != null ? info.equals(that.info) : that.info == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + hours;
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeEntryInfo{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", date=" + date +
+                ", hours=" + hours +
+                ", info='" + info + '\'' +
+                '}';
+    }
+
     public static class Builder {
         private long id;
         private long projectId;
@@ -66,44 +105,5 @@ public class TimeEntryInfo {
         public TimeEntryInfo build() {
             return new TimeEntryInfo(this);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TimeEntryInfo that = (TimeEntryInfo) o;
-
-        if (id != that.id) return false;
-        if (projectId != that.projectId) return false;
-        if (userId != that.userId) return false;
-        if (hours != that.hours) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null)
-            return false;
-        return info != null ? info.equals(that.info) : that.info == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + hours;
-        result = 31 * result + (info != null ? info.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TimeEntryInfo{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", userId=" + userId +
-            ", date=" + date +
-            ", hours=" + hours +
-            ", info='" + info + '\'' +
-            '}';
     }
 }

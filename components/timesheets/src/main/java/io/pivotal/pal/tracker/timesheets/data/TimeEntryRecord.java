@@ -22,6 +22,41 @@ public class TimeEntryRecord {
         return new Builder();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TimeEntryRecord that = (TimeEntryRecord) o;
+
+        if (id != that.id) return false;
+        if (projectId != that.projectId) return false;
+        if (userId != that.userId) return false;
+        if (hours != that.hours) return false;
+        return date != null ? date.equals(that.date) : that.date == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + hours;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeEntryRecord{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", date=" + date +
+                ", hours=" + hours +
+                '}';
+    }
+
     public static class Builder {
 
         private long id;
@@ -58,40 +93,5 @@ public class TimeEntryRecord {
             this.hours = hours;
             return this;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TimeEntryRecord that = (TimeEntryRecord) o;
-
-        if (id != that.id) return false;
-        if (projectId != that.projectId) return false;
-        if (userId != that.userId) return false;
-        if (hours != that.hours) return false;
-        return date != null ? date.equals(that.date) : that.date == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + hours;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TimeEntryRecord{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", userId=" + userId +
-            ", date=" + date +
-            ", hours=" + hours +
-            '}';
     }
 }

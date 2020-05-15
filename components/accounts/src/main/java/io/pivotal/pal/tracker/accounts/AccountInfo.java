@@ -22,6 +22,39 @@ public class AccountInfo {
         return new Builder();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AccountInfo that = (AccountInfo) o;
+
+        if (id != that.id) return false;
+        if (ownerId != that.ownerId) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null)
+            return false;
+        return info != null ? info.equals(that.info) : that.info == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (ownerId ^ (ownerId >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountInfo{" +
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", name='" + name + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
+
     public static class Builder {
         private long id;
         private long ownerId;
@@ -51,38 +84,5 @@ public class AccountInfo {
             this.info = info;
             return this;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AccountInfo that = (AccountInfo) o;
-
-        if (id != that.id) return false;
-        if (ownerId != that.ownerId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null)
-            return false;
-        return info != null ? info.equals(that.info) : that.info == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (ownerId ^ (ownerId >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (info != null ? info.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "AccountInfo{" +
-            "id=" + id +
-            ", ownerId=" + ownerId +
-            ", name='" + name + '\'' +
-            ", info='" + info + '\'' +
-            '}';
     }
 }

@@ -26,6 +26,45 @@ public class AllocationInfo {
         return new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "AllocationInfo{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", firstDay=" + firstDay +
+                ", lastDay=" + lastDay +
+                ", info='" + info + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AllocationInfo info1 = (AllocationInfo) o;
+
+        if (id != info1.id) return false;
+        if (projectId != info1.projectId) return false;
+        if (userId != info1.userId) return false;
+        if (firstDay != null ? !firstDay.equals(info1.firstDay) : info1.firstDay != null)
+            return false;
+        if (lastDay != null ? !lastDay.equals(info1.lastDay) : info1.lastDay != null)
+            return false;
+        return info != null ? info.equals(info1.info) : info1.info == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (firstDay != null ? firstDay.hashCode() : 0);
+        result = 31 * result + (lastDay != null ? lastDay.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
+    }
 
     public static class Builder {
         private long id;
@@ -68,45 +107,5 @@ public class AllocationInfo {
             this.info = info;
             return this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "AllocationInfo{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", userId=" + userId +
-            ", firstDay=" + firstDay +
-            ", lastDay=" + lastDay +
-            ", info='" + info + '\'' +
-            '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AllocationInfo info1 = (AllocationInfo) o;
-
-        if (id != info1.id) return false;
-        if (projectId != info1.projectId) return false;
-        if (userId != info1.userId) return false;
-        if (firstDay != null ? !firstDay.equals(info1.firstDay) : info1.firstDay != null)
-            return false;
-        if (lastDay != null ? !lastDay.equals(info1.lastDay) : info1.lastDay != null)
-            return false;
-        return info != null ? info.equals(info1.info) : info1.info == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + (firstDay != null ? firstDay.hashCode() : 0);
-        result = 31 * result + (lastDay != null ? lastDay.hashCode() : 0);
-        result = 31 * result + (info != null ? info.hashCode() : 0);
-        return result;
     }
 }

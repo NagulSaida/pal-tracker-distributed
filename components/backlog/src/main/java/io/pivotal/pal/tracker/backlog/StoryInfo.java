@@ -22,6 +22,38 @@ public class StoryInfo {
         return new Builder();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StoryInfo storyInfo = (StoryInfo) o;
+
+        if (id != storyInfo.id) return false;
+        if (projectId != storyInfo.projectId) return false;
+        if (name != null ? !name.equals(storyInfo.name) : storyInfo.name != null)
+            return false;
+        return info != null ? info.equals(storyInfo.info) : storyInfo.info == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "StoryInfo{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", name='" + name + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
 
     public static class Builder {
         private long id;
@@ -52,38 +84,5 @@ public class StoryInfo {
             this.info = info;
             return this;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StoryInfo storyInfo = (StoryInfo) o;
-
-        if (id != storyInfo.id) return false;
-        if (projectId != storyInfo.projectId) return false;
-        if (name != null ? !name.equals(storyInfo.name) : storyInfo.name != null)
-            return false;
-        return info != null ? info.equals(storyInfo.info) : storyInfo.info == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (info != null ? info.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "StoryInfo{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", name='" + name + '\'' +
-            ", info='" + info + '\'' +
-            '}';
     }
 }

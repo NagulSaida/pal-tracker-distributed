@@ -14,25 +14,6 @@ public class StoryFields {
         return new Builder();
     }
 
-    public static class Builder {
-        private long projectId;
-        private String name;
-
-        public StoryFields build() {
-            return new StoryFields(this);
-        }
-
-        public Builder projectId(long projectId) {
-            this.projectId = projectId;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,8 +35,27 @@ public class StoryFields {
     @Override
     public String toString() {
         return "StoryFields{" +
-            "projectId=" + projectId +
-            ", name='" + name + '\'' +
-            '}';
+                "projectId=" + projectId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private long projectId;
+        private String name;
+
+        public StoryFields build() {
+            return new StoryFields(this);
+        }
+
+        public Builder projectId(long projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
     }
 }
